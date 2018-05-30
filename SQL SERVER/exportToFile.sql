@@ -3,8 +3,10 @@
 	- PARA A FUNÇÃO FUNCIONAR CORRETAMENTE É NECESSÁRIO HABILITAR O xp_cmdshell
 	- PARA EVITAR A NECESSIDADE DE HABILITAR O xp_cmdshell, PODE-SE USAR A 
 		PROCEDURE runExportToFile(@datasource text, @file_target text). A EXECUÇÃO
-		DA REFERIDA PROCEDURE HABILITA O xp_cmdshell, EXECUTA A FUNÇÃO exportToFile E
-		EM SEGIDA DESABILITA O xp_cmdshell
+		DA REFERIDA PROCEDURE:
+			- HABILITA O xp_cmdshell,
+			- EXECUTA A FUNÇÃO exportToFile E
+			- DESABILITA O xp_cmdshell
 		
 	@param: datasource (composto pelo nome do banco + nome do eschema + nome da tabela
 	@param: file_target(é o caminho (diretório + nome do arquivo) para onde os dados devem ser exportados
@@ -13,8 +15,8 @@
 	@return: retorna um integer indicando o total de erros ocorrido durante a execução da função
 
 	EXEMPLOS DE USO: 
-		- select dbo.exportToFile('db_Escola.dbo.tbl_alunos', 'C:/BCP/tbl_alunos4.txt')
-		- select dbo.exportToFile('bd_exemplos_devmedia.dbo.VENDAS','C:/BCP/tblVendas.txt')
+		- select dbo.exportToFile('db_Escola.dbo.tbl_alunos', 'C:/BCP/tbl_alunos4.txt', @options= default)
+		- select dbo.exportToFile('bd_exemplos_devmedia.dbo.VENDAS','C:/BCP/tblVendas.txt', @options= ' -T -c -t"|"')
 */
 CREATE FUNCTION exportToFile(@datasource text, @file_target text, @options text = ' -T -c -t;') RETURNS INTEGER AS
 BEGIN
